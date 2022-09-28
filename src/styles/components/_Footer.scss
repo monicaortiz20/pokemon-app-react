@@ -1,0 +1,10 @@
+@import '../utils/mixins.scss';
+
+.footer {
+    @include column-centered-content;
+    background-color: red;
+    min-height: 7vh;
+    justify-content: center;
+    color: white;
+    position: relative;
+}
