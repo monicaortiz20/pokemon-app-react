@@ -1,58 +1,85 @@
-import React, { useState, useContext, useEffect} from 'react';
+import React, { useState, useEffect, useContext} from 'react';
 import { pokemonContext } from '../../../context/pokemonContext';
+import { useDebounce } from 'use-debounce';
 
 import axios from 'axios';
-
 import Card from './Card/Card';
 
 const Search = () => {
  
   //estados
-  const { data, setData } = useContext(pokemonContext);
-  const [pokemon, setPokemon] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [pokemon, setPokemon] = useContext(pokemonContext);
+  const [input, setInput] = useState("");
+  const [debouncedText] = useDebounce(input, 2000); //almacenamos el valor del input
+  const [error, setError] = useState(false) // para poner mensaje de error cuando se repite el pokemon
+  const [message, setMessage] = useState('')
 
-  const arrayAll = [] //vamos metiendo todo aquí
 
-    useEffect(() => {
-      if(pokemon != null) {
-        async function getPokemon () {
+  const getPokemon = async()=> {
+    
+    try{
+      // Petición HTTP - destructuramos el obj que obtenemos con axios
+      const {data} = await axios.get(`https://pokeapi.co/api/v2/pokemon/${input.toLocaleLowerCase()}`);
 
-          if (data.length === 0) {
-            try {
-              const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
-              //para acceder a los types hacemos otro fetch a .forms del obj anterior
-              const resp = await axios.get(`${response.data.forms[0].url}`)
-
-              const pokeObj = {
-                Image: response.data.sprites.other.dream_world,
-                Name: response.data.name,
-                ID: response.data.id,
-                typeOne: resp.data.types[0]. type.name
-              }
-
-              //para acceder al type2, el length tiene que ser >1:
-              if(resp.data.types.length > 1) {
-                pokeObj.typeTwo = resp.data.types[1].type.name
-              }
-
-              setData(pokeObj) //le pasamos el obj del pokemon
-              setLoading(true) //ya ha cargado
-
-            } catch (error) {
-              console.log(error)
-            }
-          }
-        }
+      const pokemonObj= { 
+        id: data.id,
+        name: data.name, 
+        type: data.types[0].type.name,
+        img: data.sprites.front_default, 
+        firstMove: data.moves[0].move.name,
+        secondMove: data.moves[1].move.name,
+        weight: data.weight
       }
-    })
+
+        if(!pokemon.map(poke=>poke.name).includes(debouncedText) ){ // condicional para que no se repitan los pokemon ya buscados
+          setPokemon( [pokemonObj,...pokemon] ) //nuevo dato del imput al principio, viejo detras mejor exp User (ux/ui)
+        }else{
+          handlerError("You have already search this pokemon")
+        }
+
+
+    }catch(error){
+       console.log(error);
+    }
+    setInput("")// limpiamos el input
+  }
+
+
+  useEffect(() => {   
+    const pokeName = pokemon.map(poke=>poke.name)
+    if( debouncedText.length>0 ){ // si el input está vacío no busca
+      getPokemon()
+    }
+    
+  }, [debouncedText]); //equivale a un componentDidUpdate. 
+  
+
+  //funciones handle:
+  const handleChange = (e) => {
+    setInput(e.target.value)
+  }
+
+  const handlerError = (error) =>{
+    setMessage(`Error - ${error}`)
+    setError(true)
+    setTimeout(() => {
+      setError(false)
+      setMessage("")
+    }, 3500);
+  }
+
+
   
   return (
     <section>
       <div>
       <h2 htmlFor="search">Search your pokemon!</h2>
-      <input type="text" name="search" id="search" onChange={(e) => debounced(e.target.value)} />
-      <div id="cardContainer">{loading ? <Card /> : null}
+      <div>
+          <input onChange={(e)=>handleChange(e)} value={input}  placeholder='Search your pokemon!'  type="text"/>
+          {error ? <p>{message}</p> : ""}
+        </div>        
+        <div>
+        { pokemon.length !== 0 ? pokemon.map((poke, index)=> <Card pokemon={poke} key={index} />) : "" }
       </div>
     </div>
     </section>
