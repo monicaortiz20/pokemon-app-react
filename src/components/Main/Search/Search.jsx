@@ -4,6 +4,7 @@ import { pokemonContext } from '../../../context/pokemonContext';
 
 import axios from 'axios';
 import Card from './Card/Card';
+import logo from '../../../assets/poke-logo.png';
 
 const Search = () => {
 
@@ -33,7 +34,7 @@ const Search = () => {
 
       if (!poke.map(poke => poke.name).includes(debouncedText)) { // condicional para que no se repitan los pokemon ya buscados
         setPoke([pokemonObj, ...poke])
-        
+
       } else {
         handlerError("You have already search this pokemon")
       }
@@ -47,7 +48,7 @@ const Search = () => {
 
 
   useEffect(() => {
-    // const pokeName = [poke.map(poke => poke.name)]
+    // const pokeName = poke.map(poke => poke.name)   FALLA, no lee array
     if (debouncedText.length > 0) { // si el input está vacío no busca
       getPokemon()
     }
@@ -70,16 +71,19 @@ const Search = () => {
   }
 
 
-
   return (
     <section>
       <div className='container-search'>
-        <h2 htmlFor="search">Search your pokemon!</h2>
+        <div className='container-search'>
+          <img src={logo} alt="logo-pokemon" className='img-logo' />
+          <h2 htmlFor="search">Search your pokemon!</h2>
+
+        </div>
         <div>
           <input onChange={(e) => handleChange(e)} value={input} placeholder='ninetales' type="text" />
-          {error ? <p>{message}</p> : ""}
+          {error ? <p>{message}</p> : null}
         </div>
-        {/* <div>{poke.length !== 0 ? poke.map((poke, index) => <Card pokemon={poke} key={index} />) : null}</div> */}
+        <div>{poke.length !== 0 ? poke.map((poke, index) => <Card pokemon={poke} key={index} />) : null}</div>
       </div>
     </section>
   )

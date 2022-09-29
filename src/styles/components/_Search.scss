@@ -5,13 +5,15 @@ section {
     
 }
 
-.poke-logo{
+.img-logo{
     width: 500px;
     margin: 40px;
+    @include column-centered-content ; 
+
 }
 
 .container-search{
-    margin-bottom: 35vh;
+    margin-bottom: 2.6vh;
 
     & > h2 {
         -webkit-text-stroke: 1px black;
