@@ -2,7 +2,8 @@
     align-items: center;
     text-align: center;
     justify-content: center;
-    margin: 30px;
+    margin: 700px;
+   
 
     & > input {
         margin:20px;
@@ -14,7 +15,25 @@
         margin:20px;
         padding: 15px;
         text-align: center;
-        color: white;
-        background-color:  rgb(0,0,255);
+        color: black;
+        background-color: #FFCE00;
+        font-family: 'Pokemon Solid', sans-serif;
     }
+}
+
+.menu-desplegable{
+    margin:20px;
+}
+
+section {
+    margin-bottom: 31vh;
+    font-family: 'Pokemon Solid', sans-serif;
+    font-size: larger;
+    color: #0755AA;
+
+}
+
+#typeOne{
+    -webkit-text-stroke: 1px black;
+
 }
