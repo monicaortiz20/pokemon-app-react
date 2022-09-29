@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
 
+
 // useFetch será una función que reciba como parámetro un string con una url
 
 const useFetch = (url) => {
@@ -15,9 +16,10 @@ const useFetch = (url) => {
                 const response = await axios.get(url)
                 // vamos a agregar un setTimeout a continuación del fetch para apreciar mejor el comportamiento del hook
                 // Dentro del setTimeout actualizaremos los dos estados de este hook (loading y result)
-                //Esto ya no está
+                setTimeout(() => {
                     setResult(response.data)
                     setLoading(false)
+                }, 5000);
             } catch (err) {
                 console.log(err)
             }

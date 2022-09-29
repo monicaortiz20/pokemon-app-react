@@ -1,0 +1,32 @@
+@import '../utils/mixins.scss';
+
+section {
+    @include column-centered-content ; 
+    
+}
+
+.poke-logo{
+    width: 500px;
+    margin: 40px;
+}
+
+.container-search{
+    margin-bottom: 35vh;
+
+    & > h2 {
+        -webkit-text-stroke: 1px black;
+        margin:50px
+
+    }
+
+    & > div {
+        @include column-centered-content ; 
+    }
+
+    & > div > input {
+        text-align: center;
+        padding: 10px;
+
+    }
+
+}

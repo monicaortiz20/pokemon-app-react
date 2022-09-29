@@ -2,9 +2,12 @@
 
 .footer {
     @include column-centered-content;
-    background-color: red;
+    background-color: #870F06;
     min-height: 7vh;
     justify-content: center;
     color: white;
-    position: relative;
+    position:relative;
+    font-family: 'Pokemon Solid', sans-serif;
+    -webkit-text-stroke: 1px black;
+    font-size:x-large;
 }
