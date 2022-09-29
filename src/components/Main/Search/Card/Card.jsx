@@ -5,11 +5,11 @@ import { pokemonContext } from '../../../../context/pokemonContext';
 const Card = () => {
 
   const {data } = useContext(pokemonContext)
-  let pokemonData = [data].flat();
-  // let cardData = [];
+
 
   return (
-    pokemonData.map (datos => (
+    pokemonData.map (datos => (    ))
+    <p>POKECARD - no pinta</p>
       <section>
         <div>
           { datos.img ? <img src={datos.img} alt="pokemon" /> : null }
@@ -18,7 +18,6 @@ const Card = () => {
         </div>
       </section>
 
-    ))
   )
 }
 
