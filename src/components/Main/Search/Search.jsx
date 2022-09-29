@@ -71,7 +71,6 @@ const Search = () => {
   }
 
 
-
   return (
     <section>
       <div className='container-search'>
@@ -82,9 +81,9 @@ const Search = () => {
         </div>
         <div>
           <input onChange={(e) => handleChange(e)} value={input} placeholder='ninetales' type="text" />
-          {error ? <p>{message}</p> : ""}
+          {error ? <p>{message}</p> : null}
         </div>
-        {/* <div>{poke.length !== 0 ? poke.map((poke, index) => <Card pokemon={poke} key={index} />) : null}</div> */}
+        <div>{poke.length !== 0 ? poke.map((poke, index) => <Card pokemon={poke} key={index} />) : null}</div>
       </div>
     </section>
   )
