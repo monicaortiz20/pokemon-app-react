@@ -9,7 +9,7 @@ import logo from '../../../assets/poke-logo.png';
 const Search = () => {
 
   //estados
-  const { poke, setPoke } = useContext(pokemonContext);
+  const { pokemon, setPokemon } = useContext(pokemonContext);
   const [input, setInput] = useState("");
 
   const [debouncedText] = useDebounce(input, 2000); //almacenamos el valor del input
@@ -32,8 +32,8 @@ const Search = () => {
         type: data.types[0].type.name,
       }
 
-      if (!poke.map(poke => poke.name).includes(debouncedText)) { // condicional para que no se repitan los pokemon ya buscados
-        setPoke([pokemonObj, ...poke])
+      if (!pokemon.map(poke => poke.name).includes(debouncedText)) { // condicional para que no se repitan los pokemon ya buscados
+        setPokemon([pokemonObj, ...pokemon])
 
       } else {
         handlerError("You have already search this pokemon")
@@ -83,7 +83,7 @@ const Search = () => {
           <input onChange={(e) => handleChange(e)} value={input} placeholder='ninetales' type="text" />
           {error ? <p>{message}</p> : null}
         </div>
-        <div>{poke.length !== 0 ? poke.map((poke, index) => <Card pokemon={poke} key={index} />) : null}</div>
+        <div>{pokemon.length !== 0 ? pokemon.map((poke, index) => <Card pokemon={poke} key={index} />) : null}</div>
       </div>
     </section>
   )
