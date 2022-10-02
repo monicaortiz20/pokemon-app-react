@@ -1,7 +1,7 @@
 
 import '../src/styles/styles.scss';
 
-import React, { useContext, useState} from 'react';
+import React, { useState} from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { pokemonContext } from './context/pokemonContext';
 
@@ -13,9 +13,21 @@ import Footer from './components/Footer';
 function App() {
 const [pokemon, setPokemon] = useState([])
 
+const addPokemon = (newPokemon) => {
+  setPokemon([...pokemon, newPokemon]);
+}
+
+
+const deletePokemon = (pokemon) => {
+  console.log("should delete pokemon from list")
+
+}
+
 const pokeData ={
   pokemon, 
-  setPokemon
+  setPokemon,
+  addPokemon,
+  deletePokemon
 }
 
 

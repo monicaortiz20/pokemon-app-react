@@ -1,26 +1,34 @@
-import React, { useContext } from 'react';
-import { pokemonContext } from '../../../../context/pokemonContext';
+import React, { useState} from 'react';
+
+const Card = (pokemon) => {
+
+  // const [poke, setPoke] = useState(pokemon.value)
+
+  // const {name, id } = poke;
+  // const type = poke.types.type.name;
+  // const img = poke.sprites.other.dream_world.front_default;
 
 
-const Card = () => {
-
-  // const {data } = useContext(pokemonContext)
-
+  // const pokemonObj = {
+  //   id: data.id,
+  //   name: data.name,
+  //   img: data.sprites.front_default,
+  //   type: data.types[0].type.name,
+  // }
 
   return (
-    <p>POKECARD - no pinta</p>
-    
-    // pokemonData.map (datos => (
-    //   <section>
-    //     <div>
-    //       { datos.img ? <img src={datos.img} alt="pokemon" /> : null }
-    //       { datos.id ? <p>ID: {datos.id}</p> : null }
-    //       { datos.name ? <h3>Nombre: {datos.name}</h3> : null }
-    //     </div>
-    //   </section>
+      <section>
+        <h2>Card</h2>
+        {/* <h3>Name:{pokemon.name}</h3>
+        <div>
+          <img src={img} alt={name} />
+          <p>#{pokemon.id}</p>
+          <p>type: {type}</p>
+        </div> */}
+      </section>
 
-    // ))
+    
   )
 }
 
-export default Card
+export default Card;
