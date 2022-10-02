@@ -1,5 +1,7 @@
 @import '../utils/mixins.scss';
 
+
+
 section {
     @include column-centered-content ; 
     
@@ -31,4 +33,55 @@ section {
 
     }
 
+}
+
+.poke-search{
+    background-image: url("../../assets/background.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin:100px;
+    border-radius: 30px;
+}
+
+.card-container{
+    color: white;
+    -webkit-text-stroke: 1px black;
+
+}
+
+.img-pokemon{
+    width: 250px;
+    height: 250px;
+
+}
+
+.nameId{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.attacks{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px;
+    border-radius: 30px;
+}
+
+.type-part{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px;
+    border-radius: 30px;
+    margin: 10px;
 }

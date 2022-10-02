@@ -3,7 +3,6 @@ import { useDebounce } from 'use-debounce';
 import { pokemonContext } from '../../../context/pokemonContext';
 
 import axios from 'axios';
-import Card from './Card/Card';
 import logo from '../../../assets/poke-logo.png';
 
 const Search = () => {
@@ -17,7 +16,7 @@ const Search = () => {
   const [message, setMessage] = useState('')
 
 
-  const [ poke, setPoke ] = useState("") //para pintar cada pokemon que buscamos en Search
+  const [poke, setPoke] = useState("") //para pintar cada pokemon que buscamos en Search
 
   const getPokemon = async () => {
 
@@ -87,23 +86,28 @@ const Search = () => {
           <input onChange={(e) => handleChange(e)} value={input} placeholder='ninetales' type="text" />
           {error ? <p>{message}</p> : null}
         </div>
-        {/* <div>{pokemon.length !== 0 ? pokemon.map((poke, index) => <Card pokemon={poke} key={index} />) : null}</div> */}
-        <div>
-          {poke !== "" 
-          ? <div> 
+        <div className='poke-search'>
+          {poke !== ""
+            ? <div className='card-container'>
               <div>
-                <img src={poke.img} alt={poke.name} />
+                <img src={poke.img} alt={poke.name} className="img-pokemon" />
               </div>
-              <div> 
-                <h2>{poke.name}</h2>
-                <p>{poke}</p>
+              <div className='nameId'>
+                <div>
+                  <h1>{poke.name}</h1>
+                  <h3>{poke.id}</h3>
+                </div>
               </div>
-              <div>
-                <>Attacks:</>
-                  <p>{poke.firstMove}</p>
-                  <p>{poke.secondMove}</p>
+              <div className='attacks'>
+                <h3>Attacks:</h3>
+                  <div>
+                    <p>{poke.firstMove}</p>
+                  </div>
+                  <div>
+                    <p>{poke.secondMove}</p>
+                  </div>
               </div>
-              <div>
+              <div className='type-part'>
                 <h4>Type:</h4>
                 <p>{poke.type}</p>
               </div>
